@@ -1,0 +1,13 @@
+name: OTHER
+description: 其它问题
+title: "[other]:"
+labels: []
+assignees:
+  - wycwyhwyq
+body:
+  - type: textarea
+    id: other
+    attributes:
+      label: 您有其它问题可在此处描述
+    validations:
+      required: true

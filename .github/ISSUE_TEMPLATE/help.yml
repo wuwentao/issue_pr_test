@@ -1,0 +1,14 @@
+name: HELP
+description: 向我们寻求帮助
+title: "[help]: "
+labels: ["help"]
+assignees:
+  - wycwyhwyq
+body:
+  - type: textarea
+    id: help
+    attributes:
+      label: 请描述一下您遇到的问题或需要什么帮助
+      placeholder: 请问我在__时遇到了__问题,应该怎么办
+    validations:
+      required: true
