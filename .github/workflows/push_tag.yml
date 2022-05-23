@@ -1,8 +1,6 @@
 name: push tag testing
 on:
-  push:
-    tags:        
-      - v*.*
+  push: tags
 
 jobs:
   dump_push_tag_contexts:
