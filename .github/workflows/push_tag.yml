@@ -2,7 +2,7 @@ name: push tag testing
 on:
   push:
     tags:        
-      - v[1-9].*
+      - v*.*
 
 jobs:
   dump_push_tag_contexts:
