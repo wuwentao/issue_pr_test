@@ -1,6 +1,9 @@
 name: Context testing
 on: push
 
+env:
+  MY_NAME: "My Global Name"
+
 jobs:
   dump_contexts:
     runs-on: ubuntu-latest
