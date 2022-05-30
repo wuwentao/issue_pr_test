@@ -2,8 +2,10 @@ name: Context testing
 on: push
 
 jobs:
-  dump_contexts_to_log:
+  dump_contexts:
     runs-on: ubuntu-latest
+    env:
+      MY_NAME: "My Test Name"
     steps:
       - name: Dump GitHub context
         id: github_context_step
@@ -18,3 +20,34 @@ jobs:
         run: echo '${{ toJSON(strategy) }}'
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
+        
+      - name: Set the value to env variable
+        id: step_one
+        run: |
+          echo "action_state=yellow" >> $GITHUB_ENV
+      - name: Use the value from env variable
+        id: step_two
+        run: |
+          echo "${{ env.action_state }}" # This will output 'yellow'
+          
+      - name: set output
+        id: set_output
+        run: echo "::set-output name=action_fruit::strawberry"
+        
+      - name: set debug
+        id: set_debug
+        run: echo "::debug::Set the Octocat variable"
+      
+      - name: mask string
+        id: mask_str
+        run: echo "::add-mask::$MY_NAME"
+        
+      - name: waring msg
+        id: warning_msg
+        run: |
+          echo '::warning:: This is a warning message, to demonstrate that commands are being processed.'
+          echo '::warning:: This is a warning again, because stop-commands has been turned off.'
+          
+      
+
+        
