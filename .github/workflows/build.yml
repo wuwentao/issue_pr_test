@@ -109,5 +109,11 @@ jobs:
         if: ${{ failure() && steps.force_failed.conclusion == 'failure' }}
         run: |
           echo "previous step failed with steps check"
+          
+      - name: success and failed and canceld
+        id: always_step2
+        if: ${{ success() || failure() || cancelled() }}
+        run: |
+          echo "success and failure and cancel will run"
          
         
