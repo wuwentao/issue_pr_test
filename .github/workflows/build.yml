@@ -52,14 +52,14 @@ jobs:
       
       - name: if check with output
         id: output_check
-        if: ${{ steps.set_output.outputs.action_fruit == strawberry }}
+        if: ${{ steps.set_output.outputs.action_fruit == 'strawberry' }}
         run: |
           echo "step matched, action_fruit == strawberry"
           echo '${{ toJSON(steps) }}'
           
       - name: if check not match with output
         id: output_check2
-        if: ${{ steps.set_output.outputs.action_fruit != strawberry }}
+        if: ${{ steps.set_output.outputs.action_fruit != 'strawberry' }}
         run: |
           echo "step matched, action_fruit != strawberry"
           echo '${{ toJSON(steps) }}'
