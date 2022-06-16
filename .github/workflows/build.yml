@@ -28,7 +28,7 @@ jobs:
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
       - name: label check
-        run: contains(github.event.issue.labels.*.name, 'bug')
+        run: echo contains(github.event.issue.labels.*.name, 'bug')
       - name: milestone check
         if: ${{ github.event.pull_request.milestone == 'none' }}
         run:  echo "milestone is none"
