@@ -30,7 +30,7 @@ jobs:
       - name: label check
         run: contains(github.event.issue.labels.*.name, 'bug')
       - name: milestone check
-        if: ${{ github.event.pull_request.milestone == none }}
+        if: ${{ github.event.pull_request.milestone == 'none' }}
         run:  echo "milestone is none"
         
       - name: Set the value to env variable
