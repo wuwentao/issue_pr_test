@@ -27,6 +27,11 @@ jobs:
         run: echo '${{ toJSON(strategy) }}'
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
+      - name: label check
+        run: contains(github.event.issue.labels.*.name, 'bug')
+      - name: milestone check
+        if: ${{ github.event.pull_request.milestone == none }}
+        run:  echo "milestone is none"
         
       - name: Set the value to env variable
         id: step_one
