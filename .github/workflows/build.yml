@@ -27,9 +27,12 @@ jobs:
         run: echo '${{ toJSON(strategy) }}'
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
-      - name: label check
+      - name: label not match check
         if: ${{ ! contains(github.event.issue.labels.*.name, 'bug') }}
         run:  echo "label bug not exist"
+      - name: label match bug check
+        if: ${{ contains(github.event.issue.labels.*.name, 'bug') }}
+        run:  echo "label bug exist"
       - name: milestone check
         if: ${{ ! github.event.pull_request.milestone }}
         run:  echo "milestone is ${{ github.event.pull_request.milestone }}"
@@ -49,11 +52,15 @@ jobs:
         
       - name: set debug
         id: set_debug
-        run: echo "::debug::Set the Octocat variable"
+        run: |
+          echo "::debug::Set the Octocat variable"
+          echo '${{ toJSON(steps) }}'
       
       - name: mask string
         id: mask_str
-        run: echo "::add-mask::$MY_NAME"
+        run: |
+          echo "::add-mask::$MY_NAME"
+          echo '${{ toJSON(steps) }}'
         
       - name: waring msg
         id: warning_msg
@@ -105,6 +112,8 @@ jobs:
         if: ${{ always() }}
         run: |
           echo "previous step canceled"
+          echo '${{ toJSON(steps) }}'
+          echo '${{ toJSON(jobs) }}'
           
       - name: force Failing step
         id: force_failed
