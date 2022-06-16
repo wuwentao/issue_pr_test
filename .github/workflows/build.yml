@@ -29,7 +29,7 @@ jobs:
         run: echo '${{ toJSON(matrix) }}'
       - name: label check
         if: ${{ ! contains(github.event.issue.labels.*.name, 'bug') }}
-        run:  echo "label bug exist"
+        run:  echo "label bug not exist"
       - name: milestone check
         if: ${{ ! github.event.pull_request.milestone }}
         run:  echo "milestone is ${{ github.event.pull_request.milestone }}"
