@@ -49,7 +49,21 @@ jobs:
       - name: set output
         id: set_output
         run: echo "::set-output name=action_fruit::strawberry"
-        
+      
+      - name: if check with output
+        id: output_check
+        if: ${{ steps.set_output.outputs.action_fruit == strawberry }}
+        run: |
+          echo "step matched, action_fruit == strawberry"
+          echo '${{ toJSON(steps) }}'
+          
+      - name: if check not match with output
+        id: output_check2
+        if: ${{ steps.set_output.outputs.action_fruit != strawberry }}
+        run: |
+          echo "step matched, action_fruit != strawberry"
+          echo '${{ toJSON(steps) }}'
+      
       - name: set debug
         id: set_debug
         run: |
