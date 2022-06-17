@@ -83,6 +83,7 @@ jobs:
         id: reserve_dut
         if: ${{ steps.get_dut.outputs.device != '[]' }}
         run: |
+          set -x
           echo "reserve DUT"
           echo ${{needs.get_dut.outputs.device}}
           test -d bin || mkdir ./bin
@@ -92,8 +93,11 @@ jobs:
           device=${{ steps.get_dut.outputs.device }}
           echo $device
           available=$(./bin/dut convert $device)
+          echo "available device args:"
           echo $available
           reserved=$(./bin/dut add --dest running --site github-actions --source $PULL_REQUEST_ID --job $GITHUB_RUN_ID $available )
+          echo "reserved device:"
+          echo $reserved
           echo "::set-output name=reserved::$reserved"
 
       - name: Load image
