@@ -89,13 +89,19 @@ jobs:
           test -f ./bin/dut && rm -rf ./bin/dut
           wget -qc https://ai.b-bug.org/k510_buildroot/github/dut -O ./bin/dut
           chmod +x ./bin/dut
-          echo ${{ steps.get_dut.outputs.device }}
-          device=$(./bin/dut add --dest running --hw_type k510 --hw_model $HW_MODEL --hw_ver $HW_VER --site github-actions --source $PULL_REQUEST_ID --job $GITHUB_RUN_ID)
-          echo "::set-output name=reserve::$reserve"
+          device=${{ steps.get_dut.outputs.device }}
+          echo $device
+          available=$(./bin/dut convert $device)
+          echo $available
+          reserved=$(./bin/dut add --dest running --site github-actions --source $PULL_REQUEST_ID --job $GITHUB_RUN_ID $available )
+          echo "::set-output name=reserved::$reserved"
 
       - name: Load image
         run: |
+          echo "available device:"
           echo ${{ steps.get_dut.outputs.device }}
+          echo "reserved device:"
+          echo ${{ steps.reserve_dut.outputs.reserved }}
           test -d bin || mkdir ./bin
           test -f ./bin/ci && rm -rf ./bin/ci
           wget -qc https://ai.b-bug.org/k510_buildroot/github/ci -O ./bin/ci
