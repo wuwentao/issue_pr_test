@@ -79,7 +79,7 @@ jobs:
 
       - name: Reserve DUT
         id: reserve_dut
-        if: ${{ steps.get_dut.outputs.device ！= '[]' }}
+        if: ${{ steps.get_dut.outputs.device != '[]' }}
         run: |
           echo "reserve DUT"
           echo ${{needs.get_dut.outputs.device}}
