@@ -53,7 +53,7 @@ jobs:
     name: Load
     needs: build_image
     timeout-minutes: 5
-    runs-on: [self-hosted, k510_buildroot]
+    runs-on: [self-hosted]
     outputs:
       device: ${{ steps.get_dut.outputs.device }}
     container:
