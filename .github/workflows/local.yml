@@ -107,3 +107,9 @@ jobs:
           echo $PULL_REQUEST_ID
           echo $GITHUB_RUN_ID
           ./bin/ci --project k510_buildroot --merge_id $PULL_REQUEST_ID --pipeline_id $GITHUB_RUN_ID --hw_ver $HW_VER --hw_model $HW_MODEL
+          
+      - name: release dut
+        id: release_dut
+        if: ${{ always() }}
+        run: |
+          echo "release dut"
