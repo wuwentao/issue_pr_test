@@ -75,6 +75,8 @@ jobs:
           wget -qc https://ai.b-bug.org/k510_buildroot/github/dut -O ./bin/dut
           chmod +x ./bin/dut
           device=$(./bin/dut show --dest available --hw_type k510 --hw_model $HW_MODEL --hw_ver $HW_VER )
+          echo "script finished:"
+          echo $device
           echo "::set-output name=device::$device"
 
       - name: Reserve DUT
